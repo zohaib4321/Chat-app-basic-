@@ -119,7 +119,6 @@ const getAllUsers = asyncHandler(async (req, res) => {
 //     .send("User Logged Out Successfully")
 // })
 
-
 const logoutUser = asyncHandler(async (req, res) => {
     await User.deleteOne({_id: {$eq: req.user._id}})
 
