@@ -8,7 +8,7 @@ router.route("/login").post(loginUser)
 
 // secured routes
 router.route("/").get(verifyJWT, getAllUsers);
-router.route("/logout").post(verifyJWT, logoutUser)
+// router.route("/logout").post(verifyJWT, logoutUser)
 
 module.exports = router
 

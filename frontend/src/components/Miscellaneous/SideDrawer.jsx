@@ -31,6 +31,8 @@ import {
     ChevronDownIcon
 } from "@chakra-ui/icons"
 import ChatLoading from '../ChatLoading'
+import UserListItem from '../UserAvatar/UserListItem'
+import axios from "axios"
 
 function SideDrawer() {
 
@@ -55,10 +57,10 @@ function SideDrawer() {
 
     //search
 
-    const searchHandler = () => {
+    const searchHandler = async() => {
         if (!search) {
             toast({
-            title: "Please Enter something in search",
+            title: "Please enter something in search",
             status: "warning",
             duration: 5000,
             isClosable: true,
@@ -68,9 +70,17 @@ function SideDrawer() {
         }
         try {
             setLoading(true)
-            setTimeout(() => {
+            console.log("here");
+            await axios.get(`/api/users/?search=${search}`)
+            console.log(search);
+            // .then((res) => {
+            //     console.log(res.data);
+            //     setSearchResult(data)
                 setLoading(false)
-            }, 5000);
+            // })
+            // .catch((error) => console.log(error))
+            // setLoading(false)
+
         } catch (error) {
             toast({
                 title: "Error Occured!",
@@ -82,6 +92,10 @@ function SideDrawer() {
             });
         }
     }
+
+    //access chat
+
+    const accessChat = () => {}
 
 return (
     <>
@@ -146,7 +160,15 @@ return (
             <Button onClick={searchHandler}>Go</Button>
             </Box>
             {
-                loading ? <ChatLoading /> : <span>results</span>
+                loading ? <ChatLoading /> : (
+                    searchResult?.map((user) => 
+                    <UserListItem 
+                    key={user.data._id}
+                    user={user.data}
+                    handleFunction={() => accessChat(user.data._id)}
+                    />
+                    )
+                )
             }
         </DrawerBody>
         </DrawerContent>

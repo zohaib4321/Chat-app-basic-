@@ -40,12 +40,20 @@ const registerUser = asyncHandler(async (req, res) => {
     pic,
     });
 
-    if (user) {
-    res.status(201).send(user);
-    } else {
-    res.status(400);
-    throw new Error("User not created");
+    if (!user) {
+        throw new Error("User not created");
     }
+
+    const options = {
+        httpOnly: true,
+        secure: true
+    }
+    
+    const {accessToken} = await generateAccessAndRefreshTokens(user._id)
+    return res
+    .status(201)
+    .cookie("accessToken", accessToken, options)
+    .send(user)
 });
 
 const loginUser = asyncHandler(async(req, res) => {
@@ -59,7 +67,7 @@ const loginUser = asyncHandler(async(req, res) => {
     const user = await User.findOne({email})
 
     if (!user) {
-        throw new Error(404, "User does not exist")
+        throw new Error("User does not exist")
     }
 
     const isPasswordValid = await user.matchPassword(password)

@@ -36,7 +36,6 @@ app.use("/api/message", messageRoutes)
 app.use(notFound)
 app.use(errorHandler)
 
-
 // server listen
 app.listen(port, () => {
     console.log(`Server running at port ${port}`);
