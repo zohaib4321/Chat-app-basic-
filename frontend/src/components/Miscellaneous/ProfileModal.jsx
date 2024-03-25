@@ -13,9 +13,7 @@ import {
     ModalFooter,
     Text
 } from "@chakra-ui/react"
-import {
-    ViewIcon,
-} from "@chakra-ui/icons"
+import {ViewIcon} from "@chakra-ui/icons"
 
 function ProfileModal({user, children}) {
     // console.log(user);
@@ -39,7 +37,8 @@ function ProfileModal({user, children}) {
             fontSize="40px"
             display="flex"
             justifyContent="center"
-            >{user.data.username}</ModalHeader>
+            >{user.username}
+            </ModalHeader>
             <ModalCloseButton />
             <ModalBody
             display="flex"
@@ -50,11 +49,11 @@ function ProfileModal({user, children}) {
             <Image 
             borderRadius="full"
             boxSize="150px"
-            src={user.data.pic}
-            alt={user.data.name}
+            src={user.pic}
+            alt={user.username}
             />
             <Text>
-                {user?.data.email}
+                {user?.email}
             </Text>
             </ModalBody>
             <ModalFooter>

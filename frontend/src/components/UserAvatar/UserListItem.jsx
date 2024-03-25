@@ -28,14 +28,14 @@ function UserListItem({user, handleFunction}) {
         mr={2}
         size="sm"
         cursor="pointer"
-        name={user.data.name}
-        src={user.data.pic}
+        name={user.username}
+        src={user.pic}
         />
         <Box>
-        <Text>{user.data.name}</Text>
+        <Text>{user.username}</Text>
         <Text fontSize="xs">
             <b>Email : </b>
-            {user.data.email}
+            {user.email}
         </Text>
         </Box>
         </Box>

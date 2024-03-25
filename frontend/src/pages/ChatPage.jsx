@@ -2,23 +2,21 @@ import React from 'react'
 import SideDrawer from '../components/Miscellaneous/SideDrawer'
 import MyChats from "../components/MyChats"
 import ChatBox from "../components/ChatBox"
+import {Box}from '@chakra-ui/react'
 import { ChatState } from '../context/ChatProvider'
-import { useNavigate } from 'react-router-dom';
-import {
-  Box ,
-
-  }from '@chakra-ui/react'
+import { useNavigate } from 'react-router-dom'
 
 
 function ChatPage() {
+  
+  const { user } = ChatState()
+  // console.log(user);
 
   const navigate = useNavigate()
-  const { user } = ChatState()
-  console.log(user);
   if (!user) {
     navigate('/')
   }
-
+  
   return (
     <div style={{width: "100%"}}>
       {user && <SideDrawer />}

@@ -20,9 +20,12 @@ function HomePage() {
   useEffect(() => {
     const user = JSON.parse(localStorage.getItem("userInfo"));
 
-    if (user) navigate("/chats")
+    if (user) {
+      navigate("/chats")
+    } 
 
   }, [navigate])
+
 
   return (
     <Container maxW="xl" centerContent display='grid' placeItems='center'>
