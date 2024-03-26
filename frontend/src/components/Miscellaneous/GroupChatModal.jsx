@@ -48,8 +48,8 @@ function GroupChatModal({ children }) {
 				name: groupChatName,
 				users: JSON.stringify(selectedUsers.map((u) => u._id)),
 			}
-            );
-			console.log(data);
+      );
+			// console.log(data);
 			setChats([data, ...chats]);
 			onClose();
 			toast({
@@ -71,8 +71,8 @@ function GroupChatModal({ children }) {
 		}
 	};
 
-    console.log(selectedUsers);
-    console.log(chats);
+    // console.log(selectedUsers);
+    // console.log(chats);
 
 	const handleGroup = (userToAdd) => {
 		if (selectedUsers.includes(userToAdd)) {

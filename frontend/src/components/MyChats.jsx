@@ -18,7 +18,7 @@ function MyChats({fetchAgain}) {
 	const fetchChats = async () => {
 		try {
 			const { data } = await axios.get("/api/chat");
-      console.log(data);
+      // console.log(data);
 			setChats(data);
 			// console.log(chats);
 		} catch (error) {
@@ -39,13 +39,13 @@ function MyChats({fetchAgain}) {
 		fetchChats();
 	}, [fetchAgain]);
 	// console.log(loggedUser);
-	console.log(chats);
-	if (chats) {
-		chats.map((chat) => {
-			// console.log(chat.users);
-			console.log(chat.isGroupChat);
-		})
-	}
+	// console.log(chats);
+	// if (chats) {
+	// 	chats.map((chat) => {
+	// 		// console.log(chat.users);
+	// 		console.log(chat.isGroupChat);
+	// 	})
+	// }
 	return (
 		<>
 			<Box
