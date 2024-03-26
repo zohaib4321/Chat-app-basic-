@@ -9,7 +9,7 @@ import {getSender} from "../config/ChatLogics"
 // import { getSender } from "../config/ChatLogics";
 import axios from "axios";
 
-function MyChats() {
+function MyChats({fetchAgain}) {
 	const [loggedUser, setLoggedUser] = useState();
 	const { user, selectedChat, setSelectedChat, chats, setChats } = ChatState();
 
@@ -37,12 +37,12 @@ function MyChats() {
 		setLoggedUser(JSON.parse(localStorage.getItem("userInfo")));
 		// console.log(loggedUser);
 		fetchChats();
-	}, []);
-	console.log(loggedUser);
+	}, [fetchAgain]);
+	// console.log(loggedUser);
 	console.log(chats);
 	if (chats) {
 		chats.map((chat) => {
-			console.log(chat.users);
+			// console.log(chat.users);
 			console.log(chat.isGroupChat);
 		})
 	}
@@ -68,7 +68,7 @@ function MyChats() {
 					alignItems="center"
 				>
 					My Chats
-					{/* <GroupChatModal> */}
+					<GroupChatModal>
 						<Button
 							d="flex"
 							fontSize={{ base: "17px", md: "10px", lg: "17px" }}
@@ -76,7 +76,7 @@ function MyChats() {
 						>
 							New Group Chat
 						</Button>
-					{/* </GroupChatModal> */}
+					</GroupChatModal>
 				</Box>
 				<Box
 					display="flex"
@@ -106,7 +106,6 @@ function MyChats() {
 										!chat.isGroupChat
                     ? getSender(loggedUser, chat.users)
                     : chat.chatName}
-										{/* Zohaib */}
                 </Text>
               </Box>
             ))}
