@@ -1,5 +1,5 @@
-import ChatState from "../context/ChatProvider";
-import ScrollableFeed from "react-scrollable-feed";
+import {ChatState} from "../context/ChatProvider";
+import ScrollableFeed from 'react-scrollable-feed'
 import { Avatar, Tooltip } from "@chakra-ui/react";
 import { 
     isSameUser,
@@ -8,17 +8,18 @@ import {
     isLastMessage 
 } from "../config/ChatLogics";
 
-function ScrollableChats({ messages }) {
-	const { user } = ChatState();
+
+export default function ScrollableChats({messages}) {
+	const {user} = ChatState()
+
 	return (
 		<ScrollableFeed>
-			{messages &&
-				messages.map((m, i) => {
-					<div style={{ display: "flex" }} key={m._id}>
-						{(isSameSender(messages, m, i, user._id) ||
+			{messages && messages.map((message, i) => {
+					return <div style={{ display: "flex" }} key={message._id}>
+						{(isSameSender(messages, message, i, user._id) ||
 							isLastMessage(messages, i, user._id)) && (
 							<Tooltip
-								label={m.sender.username}
+								label={message.sender.username}
 								placement="bottom-start"
 								hasArrow
 							>
@@ -27,29 +28,28 @@ function ScrollableChats({ messages }) {
 									mr={1}
 									size="sm"
 									cursor="pointer"
-									name={m.sender.username}
-									src={m.sender.pic}
+									name={message.sender.username}
+									src={message.sender.pic}
 								/>
 							</Tooltip>
 						)}
 						<span
 							style={{
 								backgroundColor: `${
-									m.sender._id === user._id ? "#BEE3F8" : "#B9F5D0"
+									message.sender._id === user._id ? "#BEE3F8" : "#B9F5D0"
 								}`,
-								marginLeft: isSameSenderMargin(messages, m, i, user._id),
-								marginTop: isSameUser(messages, m, i, user._id) ? 3 : 10,
+								marginLeft: isSameSenderMargin(messages, message, i, user._id),
+								marginTop: isSameUser(messages, message, i, user._id) ? 3 : 10,
 								borderRadius: "20px",
 								padding: "5px 15px",
 								maxWidth: "75%",
 							}}
 						>
-							{m.content}
+							{message.content}
 						</span>
 					</div>;
-				})}
+				})
+			}
 		</ScrollableFeed>
 	);
 }
-
-export default ScrollableChats;

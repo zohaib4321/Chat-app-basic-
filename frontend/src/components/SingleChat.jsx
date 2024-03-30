@@ -56,14 +56,14 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 					}
 				}
 
+				setNewMessage("")
 				const {data} = await axios.post('/api/message',
 				{
 					content: newMessage,
 					chatId: selectedChat._id,
 				},
 				config)
-				// console.log(data);
-				setNewMessage("")
+				console.log(data);
 				setMessages([...messages, data]);
 			} catch (error) {
 				toast({
@@ -85,6 +85,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 	const typingHandler = (e) => {
 		setNewMessage(e.target.value)
 	}
+
 	return (
 		<>
 			{selectedChat ? (
