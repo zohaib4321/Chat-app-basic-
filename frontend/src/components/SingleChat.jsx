@@ -14,15 +14,21 @@ import {
 	useToast,
 } from "@chakra-ui/react";
 import './style.css'
+import io from "socket.io-client"
+
+const ENDPOINT = "http://localhost:3000"
+var socket, selectedChatCompare;
+
 
 function SingleChat({ fetchAgain, setFetchAgain }) {
-	const toast = useToast()
-
+	const { user, selectedChat, setSelectedChat } = ChatState();
+	
 	const [messages, setMessages] = useState([]);
   const [loading, setLoading] = useState(false);
   const [newMessage, setNewMessage] = useState("");
-
-	const { user, selectedChat, setSelectedChat } = ChatState();
+	const [socketConnected, setSocketConnected] = useState(false);
+	
+	const toast = useToast()
 
 	const fetchMessages = async() => {
 		if (!selectedChat) return;
@@ -35,6 +41,8 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 			// console.log(data);
 			setMessages(data);
       setLoading(false);
+
+			socket.emit("join chat", selectedChat._id);
 		} catch (error) {
 			toast({
         title: "Error Occured!",
@@ -64,6 +72,7 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 				},
 				config)
 				console.log(data);
+				socket.emit("new message", data);
 				setMessages([...messages, data]);
 			} catch (error) {
 				toast({
@@ -79,8 +88,29 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 	}
 
 	useEffect(() => {
-		fetchMessages()
+		fetchMessages();
+		selectedChatCompare = selectedChat;
 	}, [selectedChat])
+
+	// useEffect(() => {
+	// 	socket.on("message recieved", (newMessageRecieved) => {
+  //     if (
+  //       !selectedChatCompare || // if chat is not selected or doesn't match current chat
+  //       selectedChatCompare._id !== newMessageRecieved.chat._id
+  //     ){
+	// 			// send notification
+	// 			console.log("here");
+	// 		} else {
+  //       setMessages([...messages, newMessageRecieved]);
+  //     }
+	// 		})
+	// })
+
+	useEffect(() => {
+		socket = io(ENDPOINT)
+		socket.emit("setup", user);
+    socket.on("connected", () => setSocketConnected(true));
+	}, [])
 
 	const typingHandler = (e) => {
 		setNewMessage(e.target.value)
