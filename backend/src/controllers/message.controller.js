@@ -16,7 +16,6 @@ const sendMessage = asyncHandler(async (req, res) => {
 	}
 
 	try {
-		console.log("here")
 		const newMessage = {
 			sender: req.user._id,
 			content: content,
