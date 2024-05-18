@@ -10,7 +10,7 @@ import { useNavigate } from 'react-router-dom'
 function ChatPage() {
   
   const { user } = ChatState()
-  // console.log(user);
+
   const [fetchAgain, setFetchAgain] = useState(false);
 
   const navigate = useNavigate()

@@ -57,8 +57,6 @@ function Signup() {
 			return;
 		}
 
-		console.log(username, email, password, pic);
-
 		try {
 			const config = {
         headers: {
@@ -124,16 +122,11 @@ function Signup() {
 				<FormLabel>Password</FormLabel>
 				<InputGroup size="md">
 					<Input
-						type={show ? "text" : "password"}
+						type="password"
 						placeholder="Enter your password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<InputRightElement width="4.5rem">
-						<Button h="1.75rem" size="sm" onClick={handleShow}>
-							{show ? "Hide" : "Show"}
-						</Button>
-					</InputRightElement>
 				</InputGroup>
 			</FormControl>
 			<FormControl id="password" isRequired>
@@ -141,20 +134,11 @@ function Signup() {
 				<InputGroup size="md">
 					<Input
 						value={confirmpassword}
-						type={show ? "text" : "password"}
+						type="password"
 						placeholder="Confirm password"
 						onChange={(e) => setConfirmpassword(e.target.value)}
 					/>
-					<InputRightElement width="4.5rem">
-						<Button h="1.75rem" size="sm" onClick={handleShow}>
-							{show ? "Hide" : "Show"}
-						</Button>
-					</InputRightElement>
 				</InputGroup>
-			</FormControl>
-			<FormControl id="pic" isRequired>
-				<FormLabel>Upload your Picture</FormLabel>
-				<Input type="file" value={pic} p={1.5} accept="image/*" />
 			</FormControl>
 			<Button
 				colorScheme="blue"

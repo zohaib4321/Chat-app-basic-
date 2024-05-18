@@ -236,8 +236,8 @@ function SingleChat({ fetchAgain, setFetchAgain }) {
 					justifyContent="center"
 					h="100%"
 				>
-					<Text fontSize="3xl" pb={3}>
-						Click on a user to start chatting
+					<Text fontSize="lg" pb={3}>
+						No chat selected
 					</Text>
 				</Box>
 			)}

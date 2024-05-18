@@ -1,7 +1,7 @@
 import React from 'react'
-import { Container,
+import { 
+  Container,
   Box, 
-  //Text, 
   Tabs, 
   TabList, 
   TabPanels, 

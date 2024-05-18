@@ -92,16 +92,11 @@ function Login() {
 				<FormLabel>Password</FormLabel>
 				<InputGroup size="md">
 					<Input
-						type={show ? "text" : "password"}
+						type="password"
 						placeholder="Enter your password"
 						value={password}
 						onChange={(e) => setPassword(e.target.value)}
 					/>
-					<InputRightElement width="4.5rem">
-						<Button h="1.75rem" size="sm" onClick={handleShow}>
-							{show ? "Hide" : "Show"}
-						</Button>
-					</InputRightElement>
 				</InputGroup>
 			</FormControl>
 
